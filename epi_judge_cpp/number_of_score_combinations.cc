@@ -5,8 +5,14 @@ using std::vector;
 
 int NumCombinationsForFinalScore(int final_score,
                                  const vector<int>& individual_play_scores) {
-  // Implement this placeholder.
-  return 0;
+  vector<int> A(final_score + 1, 0);
+  A[0] = 1;
+  for (const int &score: individual_play_scores) {
+    for (int j = score ; j <= final_score ; j++) {
+      A[j] += A[j - score];
+    }
+  }
+  return A[final_score];
 }
 
 int main(int argc, char* argv[]) {
